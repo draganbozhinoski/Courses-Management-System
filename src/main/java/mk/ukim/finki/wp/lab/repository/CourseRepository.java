@@ -3,6 +3,7 @@ package mk.ukim.finki.wp.lab.repository;
 import lombok.Data;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
+import mk.ukim.finki.wp.lab.model.exceptions.CourseNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ public class CourseRepository {
 
     public CourseRepository() {
         this.courses = new ArrayList<>(5);
-        courses.add(new Course(1L,"Веб Програмирање","Web Programming"));
-        courses.add(new Course(2L,"Оперативни Системи","OS"));
-        courses.add(new Course(3L,"Електронска и мобилна трговија","EIMT"));
-        courses.add(new Course(4L,"Компјутерски мрежи","KM"));
+//        Course a = new Course("Веб Програмирање","Web Programming");
+//        Course b = new Course("Оперативни Системи","OS");
+//        Course c = new Course("Електронска и мобилна трговија","EIMT");
+//        Course d = new Course("Компјутерски мрежи","KM");
     }
     public List<Course> findAllCourses(){
         return courses;
@@ -41,5 +42,13 @@ public class CourseRepository {
     {
         courses.add(course);
         return course;
+    }
+    public void deleteCourse(Long id)
+    {
+        courses.removeIf(c -> c.getCourseId().equals(id));
+    }
+    public Optional<Course> findByName(String name)
+    {
+        return courses.stream().filter(c -> c.getName().equals(name)).findFirst();
     }
 }

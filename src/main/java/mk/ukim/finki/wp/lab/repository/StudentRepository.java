@@ -15,6 +15,10 @@ public class StudentRepository {
 
     public StudentRepository() {
         this.students = new ArrayList<>(5);
+        students.add(new Student("testeruser1","test","Dragan Bozhinoski 1","tester"));
+        students.add(new Student("testeruser2","test","Jovan Jovanov 2","tester"));
+        students.add(new Student("testeruser3","test","Stojan Stojanov 3","tester"));
+
     }
     List<Student> findAllStudents()
     {

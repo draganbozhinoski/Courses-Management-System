@@ -14,7 +14,7 @@
     <ul>
         <li th:each="student : ${course.getStudents()}" th:text="${student.getName()} + ' ' + ${student.getSurname()} + '(' + ${student.getUsername} + ')'"></li>
     </ul>
-    <a href="/listCourses">Back</a>
+    <a href="/courses">Back</a>
 </section>
 
 </body>

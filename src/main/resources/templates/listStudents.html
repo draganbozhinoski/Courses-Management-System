@@ -37,7 +37,6 @@
         <a href="/createStudent" type="button">Create New Student</a> <br/> <br/>
         <input type="radio" name="student" th:each="student : ${studentsList}" th:value="${student.getUsername()}" th:text="${student.getName()} + ' ' + ${student.getSurname()}">
         <br/>
-
         <input type="submit" th:value="Submit"/>
     </section>
 </form>
