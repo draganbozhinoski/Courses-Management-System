@@ -6,7 +6,6 @@ import mk.ukim.finki.wp.lab.model.exceptions.CourseAlreadyHereException;
 import mk.ukim.finki.wp.lab.model.exceptions.CourseNotFoundException;
 import mk.ukim.finki.wp.lab.service.CourseService;
 import mk.ukim.finki.wp.lab.service.TeacherService;
-import mk.ukim.finki.wp.lab.web.sessionCounter.SessionCounter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +22,11 @@ import java.util.stream.Collectors;
 public class CourseController {
     private final CourseService courseService;
     private final TeacherService teacherService;
-    private final SessionCounter counter;
 
     public CourseController(CourseService courseService, TeacherService teacherService) {
         this.courseService = courseService;
         this.teacherService = teacherService;
-        this.counter = new SessionCounter();
+
     }
     @GetMapping()
     public String getCoursesPage(@RequestParam(required = false) String error, HttpServletRequest req, Model model)
@@ -48,7 +46,6 @@ public class CourseController {
                 .sorted(Comparator.comparing(Course::getName))
                 .collect(Collectors.toList()));
         model.addAttribute("users",users);
-        model.addAttribute("numSessions",counter.getNumSessions());
         return "listCourses";
     }
     @PostMapping()

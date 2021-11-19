@@ -27,4 +27,12 @@ public class TeacherRepository {
     {
         return teacherList.stream().filter(t -> t.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
+    public void addTeacher(String name,String surname,Long id)
+    {
+        teacherList.add(new Teacher(id,name,surname));
+    }
+    public void deleteTeacher(Long id)
+    {
+        teacherList.removeIf(t -> t.getId().equals(id));
+    }
 }

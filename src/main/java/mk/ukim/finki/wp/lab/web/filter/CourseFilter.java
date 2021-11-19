@@ -29,6 +29,7 @@ public class CourseFilter implements Filter {
                 && !path.equals("/courses/addCourse")
                 && !path.equals("/courses/add")
                 && !path.equals("/courses/populate")
+                && !path.contains("/teachers")
                 && !matches
                 && !Pattern.matches("/courses/delete/\\d+",path))
             resp.sendRedirect("/courses");

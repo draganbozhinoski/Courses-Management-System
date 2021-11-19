@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface TeacherService {
     List<Teacher> findAll();
     Teacher findById(Long id);
+    void addTeacher(String name,String surname,Long id);
+    void deleteTeacher(Long id);
 
 }

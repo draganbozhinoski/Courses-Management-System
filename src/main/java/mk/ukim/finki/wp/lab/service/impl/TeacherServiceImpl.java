@@ -24,4 +24,15 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher findById(Long id) {
         return teacherRepository.findById(id);
     }
+
+    @Override
+    public void addTeacher(String name, String surname, Long id) {
+        teacherRepository.addTeacher(name,surname,id);
+    }
+
+    @Override
+    public void deleteTeacher(Long id) {
+        teacherRepository.deleteTeacher(id);
+    }
+
 }

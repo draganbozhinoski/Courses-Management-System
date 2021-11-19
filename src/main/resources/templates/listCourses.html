@@ -22,7 +22,8 @@
     <h2> Number of sessions </h2>
     <h3 th:text="${users}"></h3>
     <a th:href="@{/CourseEnrollmentSummary}">Find all courses by selected student</a></br>
-    <a href="/courses/addCourse">Add new Course</a>
+    <a href="/courses/addCourse">Add new Course</a></br>
+    <a href="/teachers/allTeachers"> List all Teachers </a>
 </header>
 <main>
     <form th:method="POST" th:action="@{/courses}">
