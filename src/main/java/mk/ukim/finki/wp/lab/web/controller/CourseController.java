@@ -29,8 +29,7 @@ public class CourseController {
 
     }
     @GetMapping()
-    public String getCoursesPage(@RequestParam(required = false) String error, HttpServletRequest req, Model model)
-    {
+    public String getCoursesPage(@RequestParam(required = false) String error, HttpServletRequest req, Model model) {
         if(error != null)
         {
             model.addAttribute("hasError",true);
@@ -49,14 +48,12 @@ public class CourseController {
         return "listCourses";
     }
     @PostMapping()
-    public String addStudentPage(@RequestParam(required = false) String courseId,HttpServletRequest request)
-    {
+    public String addStudentPage(@RequestParam(required = false) String courseId,HttpServletRequest request) {
         request.getSession().setAttribute("courseId",courseId);
         return "redirect:/AddStudent";
     }
     @GetMapping("/addCourse")
-    public String addCourse(Model model)
-    {
+    public String addCourse(Model model) {
         model.addAttribute("listTeachers",teacherService.findAll());
         return "add-course";
     }
@@ -64,8 +61,7 @@ public class CourseController {
     public String saveCourse(@RequestParam String name,
                              @RequestParam String description,
                              @RequestParam String teacherId,
-                             @RequestParam(required = false) String courseId)
-    {
+                             @RequestParam(required = false) String courseId) {
         if(courseId != null)
         {
             try {
@@ -92,8 +88,7 @@ public class CourseController {
         return "redirect:/courses";
     }
     @GetMapping("/edit/{id}")
-    public String editCourse(@PathVariable String id,Model model)
-    {
+    public String editCourse(@PathVariable String id,Model model) {
         try {
             Course toEdit = courseService.findById(Long.parseLong(id));
             List<Teacher> listTeachers = teacherService.findAll();
@@ -107,14 +102,12 @@ public class CourseController {
         return "add-course";
     }
     @GetMapping("/delete/{id}")
-    public String deleteCourse(@PathVariable String id)
-    {
+    public String deleteCourse(@PathVariable String id) {
         courseService.deleteCourse(Long.parseLong(id));
         return "redirect:/courses";
     }
     @GetMapping("/populate")
-    public String populate()
-    {
+    public String populate() {
         try {
             courseService.addCourse("Web Programming", "Spring", 0L);
             courseService.addCourse("Probability and Statistics", "Maths", 1L);
