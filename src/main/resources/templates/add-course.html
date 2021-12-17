@@ -141,12 +141,12 @@
                 <option th:if="${course} != null"
                         th:each="teacher : ${listTeachers}"
                         th:selected="${teacher.getId()==course.getTeacher().getId()}"
-                        th:text="${teacher.getName() + ' ' + teacher.getSurname()}"
+                        th:text="${teacher.getTeacherFullName().getName() + ' ' + teacher.getTeacherFullName().getSurname()}"
                         th:value="${teacher.getId()}">
                 </option>
                 <option th:if="${course} == null"
                         th:each="teacher : ${listTeachers}"
-                        th:text="${teacher.getName() + ' ' + teacher.getSurname()}"
+                        th:text="${teacher.getTeacherFullName().getName() + ' ' + teacher.getTeacherFullName().getSurname()}"
                         th:value="${teacher.getId()}">
                 </option>
             </select>

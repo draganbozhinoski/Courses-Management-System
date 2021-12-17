@@ -23,7 +23,7 @@ public class ListStudentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         WebContext context = new WebContext(request,response,request.getServletContext());
-        context.setVariable("studentsList",studentService.listAll());
+        context.setVariable("studentsList",studentService.findAll());
         springTemplateEngine.process("listStudents.html",context,response.getWriter());
     }
 

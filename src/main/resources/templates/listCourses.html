@@ -21,16 +21,21 @@
     <h1 th:if="${hasError}" th:text="${error}" id="red"></h1>
     <h2> Number of sessions </h2>
     <h3 th:text="${users}"></h3>
-    <a th:href="@{/CourseEnrollmentSummary}">Find all courses by selected student</a></br>
     <a href="/courses/addCourse">Add new Course</a></br>
-    <a href="/teachers/allTeachers"> List all Teachers </a>
+    <a href="/teachers/addTeacher">Add new Teacher</a></br>
+    <a href="/grades/addGrade">Add new Grade</a></br></br>
+
+    <a th:href="@{/CourseEnrollmentSummary}">Find all courses by selected student</a></br>
+    <a href="/teachers/allTeachers"> List all Teachers </a></br>
+    <a href="/grades/allGrades"> List all Grades </a></br>
 </header>
 <main>
     <form th:method="POST" th:action="@{/courses}">
-        <h2>Choose course: (<a th:href="@{/courses/populate}">Populate</a>)</h2>
+        <h2>Choose course:</h2>
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Course ID</th>
                     <th scope="col">Course Name</th>
                     <th scope="col">Course Description</th>
                     <th scope="col">Teacher</th>
@@ -39,16 +44,19 @@
             </thead>
             <tbody>
                 <tr th:each="course: ${coursesList}">
+                    <td th:text="${course.getCourseId()}"></td>
                     <td> <input  type="radio" name="courseId" th:value="${course.getCourseId()}" th:text="${course.getName()}"> </td>
                     <td th:text="${course.getDescription()}"></td>
-                    <td th:text="${course.getTeacher().getName()+ ' ' + course.getTeacher().getSurname()}"></td>
+                    <td th:text="${course.getTeacher().getTeacherFullName().getName()+ ' ' + course.getTeacher().getTeacherFullName().getSurname()}"></td>
                     <td> <a th:href="@{/courses/edit/{id} (id = ${course.getCourseId()})}" class="btn btn-info">Edit</a> <a th:href="@{/courses/delete/{id} (id=${course.getCourseId()})}"class="btn btn-danger">Delete</a></td>
                 </tr>
             </tbody>
         </table>
         <input type="submit" th:value="Submit"/>
     </form>
-    <a th:href="@{/Logout}">Invalidate Session</a>
+    <a th:href="@{/Logout}">Invalidate Session</a></br>
+    <a th:if="${paging}" th:href="@{/courses/prev}">Prev</a>
+    <a th:if="${paging}" th:href="@{/courses/paging}">Next</a>
 </main>
 </body>
 </html>

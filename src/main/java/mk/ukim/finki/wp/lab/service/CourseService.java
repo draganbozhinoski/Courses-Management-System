@@ -14,4 +14,5 @@ public interface CourseService {
     List<Course> listAllCourses();
     Course findById(Long id);
     Course findByName(String name);
+    void save(Course z);
 }

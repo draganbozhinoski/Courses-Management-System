@@ -26,10 +26,11 @@ public class CourseFilter implements Filter {
         if(!path.equals("/courses") && ID==null
                 && !path.equals("/CourseEnrollmentSummary")
                 && !path.equals("/Logout")
-                && !path.equals("/courses/addCourse")
-                && !path.equals("/courses/add")
-                && !path.equals("/courses/populate")
                 && !path.contains("/teachers")
+                && !path.contains("/courses")
+                && !path.contains("/grades")
+                && !path.contains("createStudent")
+                && !path.contains("paging")
                 && !matches
                 && !Pattern.matches("/courses/delete/\\d+",path))
             resp.sendRedirect("/courses");

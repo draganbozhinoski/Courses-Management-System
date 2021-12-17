@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.repository;
+package mk.ukim.finki.wp.lab.repository.InMemory;
 
 import lombok.Data;
 import mk.ukim.finki.wp.lab.model.Student;
@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 
 @Repository
 @Data
-public class StudentRepository {
+public class InMemoryStudentRepository {
     public List<Student> students;
 
-    public StudentRepository() {
+    public InMemoryStudentRepository() {
         this.students = new ArrayList<>(5);
         students.add(new Student("testeruser1","test","Dragan Bozhinoski 1","tester"));
         students.add(new Student("testeruser2","test","Jovan Jovanov 2","tester"));

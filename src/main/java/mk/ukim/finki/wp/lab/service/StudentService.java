@@ -5,8 +5,8 @@ import mk.ukim.finki.wp.lab.model.Student;
 import java.util.List;
 
 public interface StudentService {
-    List<Student> listAll();
-    List<Student> searchByNameOrSurname(String text);
+    List<Student> findAll();
+    List<Student> findAllByNameOrSurname(String text);
 
     Student findByUsername(String username);
 

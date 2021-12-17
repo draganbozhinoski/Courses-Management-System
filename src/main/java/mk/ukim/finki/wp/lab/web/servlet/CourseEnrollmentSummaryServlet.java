@@ -28,7 +28,7 @@ public class CourseEnrollmentSummaryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Student> students = studentService.listAll();
+        List<Student> students = studentService.findAll();
         WebContext context = new WebContext(request,response, request.getServletContext());
         context.setVariable("studentsList",students);
         springTemplateEngine.process("selectStudent.html",context,response.getWriter());

@@ -135,8 +135,8 @@
         <h1 th:if="${teacher} != null">Edit Teacher</h1>
         <h1 th:if="${teacher} == null">Add new Teacher</h1>
         <input type="hidden" th:if="${teacher} != null" th:value="${teacher.getId()}" name="teacherId">
-        <input type="text" placeholder="Teacher Name" name="name" th:value="${teacher!=null}?${teacher.getName()}:''">
-        <input type="text" placeholder="Teacher Surname" name="surname" th:value="${teacher!=null}?${teacher.getSurname()}:''">
+        <input type="text" placeholder="Teacher Name" name="name" th:value="${teacher!=null}?${teacher.getTeacherFullName().getName()}:''">
+        <input type="text" placeholder="Teacher Surname" name="surname" th:value="${teacher!=null}?${teacher.getTeacherFullName().getSurname()}:''">
         <input type="submit" value="Submit">
     </div>
 </form>

@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.repository;
+package mk.ukim.finki.wp.lab.repository.InMemory;
 
 import lombok.Data;
 import mk.ukim.finki.wp.lab.model.Course;
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 @Repository
 @Data
-public class CourseRepository {
+public class InMemoryCourseRepository {
     List<Course> courses;
 
-    public CourseRepository() {
+    public InMemoryCourseRepository() {
         this.courses = new ArrayList<>(5);
 //        Course a = new Course("Веб Програмирање","Web Programming");
 //        Course b = new Course("Оперативни Системи","OS");

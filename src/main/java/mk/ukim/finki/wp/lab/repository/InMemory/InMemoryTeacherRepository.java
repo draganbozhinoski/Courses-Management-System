@@ -1,6 +1,7 @@
-package mk.ukim.finki.wp.lab.repository;
+package mk.ukim.finki.wp.lab.repository.InMemory;
 
 import mk.ukim.finki.wp.lab.model.Teacher;
+import mk.ukim.finki.wp.lab.model.TeacherFullName;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,16 +9,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class TeacherRepository {
+public class InMemoryTeacherRepository {
     List<Teacher> teacherList;
 
-    public TeacherRepository() {
-        this.teacherList = new ArrayList<>(5);
-        teacherList.add(new Teacher(0L,"Riste","Stojanov"));
-        teacherList.add(new Teacher(1L,"Sasho","Gramatikov"));
-        teacherList.add(new Teacher(2L,"Dragan","Bozhinoski"));
-        teacherList.add(new Teacher(3L,"Kostadin","Mishev"));
-        teacherList.add(new Teacher(4L,"Ana","Todorovska"));
+    public InMemoryTeacherRepository() {
+//        this.teacherList = new ArrayList<>(5);
+//        teacherList.add(new Teacher("Riste","Stojanov"));
+//        teacherList.add(new Teacher("Sasho","Gramatikov"));
+//        teacherList.add(new Teacher("Dragan","Bozhinoski"));
+//        teacherList.add(new Teacher("Kostadin","Mishev"));
+//        teacherList.add(new Teacher("Ana","Todorovska"));
     }
     public List<Teacher> findAll()
     {
@@ -29,7 +30,7 @@ public class TeacherRepository {
     }
     public void addTeacher(String name,String surname,Long id)
     {
-        teacherList.add(new Teacher(id,name,surname));
+        teacherList.add(new Teacher(new TeacherFullName(name,surname)));
     }
     public void deleteTeacher(Long id)
     {

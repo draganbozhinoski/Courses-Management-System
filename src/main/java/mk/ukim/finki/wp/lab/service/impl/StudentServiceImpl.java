@@ -2,7 +2,8 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.model.exceptions.InvalidStudentException;
-import mk.ukim.finki.wp.lab.repository.StudentRepository;
+import mk.ukim.finki.wp.lab.repository.InMemory.InMemoryStudentRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.StudentRepository;
 import mk.ukim.finki.wp.lab.service.StudentService;
 import org.springframework.stereotype.Service;
 
@@ -18,27 +19,23 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> listAll() {
-        return studentRepository.students;
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 
     @Override
-    public List<Student> searchByNameOrSurname(String text) {
-        return studentRepository.students.stream().filter(r -> r.getName().equals(text) || r.getSurname().equals(text)).collect(Collectors.toList());
+    public List<Student> findAllByNameOrSurname(String text) {
+        return studentRepository.findAllByNameOrSurname(text,text);
     }
     @Override
     public Student findByUsername(String username)
     {
-        if(studentRepository.students.stream().filter(r -> r.getUsername().equals(username)).count() <= 0)
-        {
-            throw new InvalidStudentException();
-        }
-        return studentRepository.students.stream().filter(r -> r.getUsername().equals(username)).collect(Collectors.toList()).get(0);
+        return studentRepository.findByUsername(username);
     }
     @Override
     public Student save(String username, String password, String name, String surname) {
         Student z = new Student(username,password,name,surname);
-        studentRepository.addStudent(z);
+        studentRepository.save(z);
         return z;
     }
 }
