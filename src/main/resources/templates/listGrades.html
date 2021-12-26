@@ -1,12 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<th:block>
 <head>
   <title>List Grades</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<a th:href="@{/courses}">Back to all courses </a>
-<h1> Showing all Grades </h1>
-<h1 th:if="${hasError}" th:text="${error}" id="red"></h1>
+<h1 class="text-info"> Showing all Grades </h1>
+<h1 th:if="${hasError}" th:text="${error}" class="text-danger"></h1>
 <form th:action="@{/grades/allGrades}">
   <h3 style="color:green">Filter grades by date here..</h3>
   <input type="datetime-local" name="from">
@@ -37,4 +34,4 @@
   </tr>
   </tbody>
 </table>
-</html>
+</th:block>

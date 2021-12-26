@@ -3,19 +3,17 @@
 <head>
     <meta charset="utf-8">
     <title> WP lab - Select a student here </title>
-
 </head>
 <body>
 <header>
     <h1> Select student to find courses! </h1>
-    <form th:method="POST" th:action="@{/CourseEnrollmentSummary}">
+    <form th:method="POST" th:action="@{/students/courseEnroll}">
         <ul>
-            <li >
-                <input type="radio" name="selectedStudent" th:each="student : ${studentsList}" th:text="${student.getName()}" th:value="${student.getName()}+'-'+${student.getSurname()} + '-' + ${student.getUsername()}">
-                <input type="submit" th:value="Submit">
+            <li th:each="student : ${studentsList}">
+                <input type="radio" name="selectedStudent" th:text="${student.getName()}" th:value="${student.getName()}+'-'+${student.getSurname()} + '-' + ${student.getUsername()}">
             </li>
         </ul>
-
+        <input type="submit" th:value="Submit">
     </form>
 </header>
 </body>

@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block>
+    <!--==========================
+        Header
+      ============================-->
+    <header id="header">
+        <div class="container-fluid">
+
+            <div id="logo" class="pull-left">
+                <h1><a href="#intro" class="scrollto">196060</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a th:href="@{/courses}">Home</a></li>
+                    <li class="menu-has-children"><a th:href="@{/courses}">Courses</a>
+                        <ul>
+                            <li><a th:href="@{/courses}">List all Courses</a></li>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li><a th:href="@{/courses/addCourse}">Add new Course</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a th:href="@{/teachers/allTeachers}">Teachers</a>
+                        <ul>
+                            <li><a th:href="@{/teachers/allTeachers}">List all Teachers</a></li>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li><a th:href="@{/teachers/addTeacher}">Add new Teacher</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+                    <li class="menu-has-children"><a th:href="@{/grades/allGrades}">Grades</a>
+                        <ul>
+                            <li><a th:href="@{/grades/allGrades}">List all Grades</a></li>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li><a th:href="@{/grades/addGrade}">Add new Grade</a></li>
+                            </th:block>
+                        </ul>
+                    </li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                    <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+                    <li class="text-info" th:if="${#request.getRemoteUser()!=null}" th:text="'Logged in as: '+${#request.getRemoteUser()}"></li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </header>
+</th:block>

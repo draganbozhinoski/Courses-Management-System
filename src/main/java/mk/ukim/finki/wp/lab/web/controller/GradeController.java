@@ -9,6 +9,7 @@ import mk.ukim.finki.wp.lab.service.GradeService;
 import mk.ukim.finki.wp.lab.service.StudentService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,9 +56,11 @@ public class GradeController {
             model.addAttribute("grades", gradeService.findAll());
             model.addAttribute("courses", courseService.listAllCourses());
         }
-        return "listGrades";
+        model.addAttribute("bodyContent","listGrades");
+        return "index";
     }
     @GetMapping("/addGrade")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addGrade(@RequestParam(required = false) String studentId,
                            @RequestParam(required = false) String courseId)
     {

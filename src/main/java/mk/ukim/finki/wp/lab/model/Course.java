@@ -20,7 +20,7 @@ public class Course {
 
     String description;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private Type type;
     @ManyToMany(fetch = FetchType.EAGER)
     List<Student> students;

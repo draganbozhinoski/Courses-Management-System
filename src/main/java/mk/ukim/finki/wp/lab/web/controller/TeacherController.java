@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.lab.model.Teacher;
 import mk.ukim.finki.wp.lab.model.exceptions.CourseAlreadyHereException;
 import mk.ukim.finki.wp.lab.model.exceptions.CourseNotFoundException;
 import mk.ukim.finki.wp.lab.service.TeacherService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +27,11 @@ public class TeacherController {
     {
         List<Teacher> teacherList = teacherService.findAll();
         model.addAttribute("teacherList",teacherList);
-        return "listTeachers";
+        model.addAttribute("bodyContent","listTeachers");
+        return "index";
     }
     @GetMapping("/addTeacher")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addTeacher()
     {
         return "add-teacher";

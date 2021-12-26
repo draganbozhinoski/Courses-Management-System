@@ -1,19 +1,19 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<th:block>
 <head>
+    <meta charset="utf-8">
     <title>List Teachers</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-
-<a th:href="@{/teachers/addTeacher}"> Add new Teacher </a><br>
-<a th:href="@{/courses}">Back to all courses </a>
+<body>
+<h1 class="text-info"> List of all Teachers </h1>
 <table class="table">
     <thead>
     <tr>
         <th scope="col">Teacher id</th>
         <th scope="col">Teacher Name</th>
         <th scope="col">Teacher Surname</th>
-        <th scope="col">Edit or Delete</th>
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <th scope="col">Edit or Delete</th>
+        </th:block>
     </tr>
     </thead>
     <tbody>
@@ -21,7 +21,14 @@
         <td th:text="${teacher.getId()}"></td>
         <td th:text="${teacher.getTeacherFullName().getName()}"></td>
         <td th:text="${teacher.getTeacherFullName().getSurname()}"></td>
-        <td> <a th:href="@{/teachers/edit/{id} (id = ${teacher.getId()})}" class="btn btn-info">Edit</a> <a th:href="@{/teachers/delete/{id} (id=${teacher.getId()})}" class="btn btn-danger">Delete</a></td>
+        <td>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')"><a
+                    th:href="@{/teachers/edit/{id} (id = ${teacher.getId()})}" class="btn btn-info">Edit</a> <a
+                    th:href="@{/teachers/delete/{id} (id=${teacher.getId()})}" class="btn btn-danger">Delete</a>
+            </th:block>
+        </td>
     </tr>
     </tbody>
 </table>
+</body>
+</th:block>

@@ -11,4 +11,5 @@ public interface StudentService {
     Student findByUsername(String username);
 
     Student save(String username, String password, String name, String surname);
+
 }

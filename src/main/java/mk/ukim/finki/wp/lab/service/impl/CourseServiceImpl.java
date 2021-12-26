@@ -61,7 +61,7 @@ public class CourseServiceImpl implements CourseService {
     }
     @Override
     public List<Course> listAllCourses() {
-        return courseRepository.findAll();
+        return courseRepository.findAllByOrderByCourseIdAsc();
     }
     @Override
     public Course findById(Long id) {
@@ -79,8 +79,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public List<Course> findAllByStudent(Student student) {
+        return courseRepository.findAllByStudentsContains(student);
+    }
+
+    @Override
     public void save(Course z) {
         courseRepository.save(z);
     }
-
 }

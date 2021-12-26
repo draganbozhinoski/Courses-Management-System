@@ -5,6 +5,7 @@ import mk.ukim.finki.wp.lab.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +13,6 @@ import java.util.Optional;
 public interface CourseRepository extends JpaRepository<Course,Long> {
     Optional<Course> findByName(String name);
     List<Course> findAllByTeacherId(Long id);
+    List<Course> findAllByOrderByCourseIdAsc();
+    List<Course> findAllByStudentsContains(Student s);
 }
