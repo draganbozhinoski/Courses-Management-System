@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Courses Modifier</title>
+    <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
@@ -127,30 +127,14 @@
     </style>
 </head>
 <body>
-<form th:action="@{/courses/add}" class="decor" th:method="POST">
+<form action="/login" class="decor" th:method="POST">
     <div class="form-left-decoration"></div>
     <div class="form-right-decoration"></div>
     <div class="circle"></div>
     <div class="form-inner">
-        <h1 th:if="${course} != null">Edit Course</h1>
-        <h1 th:if="${course} == null">Add new Course</h1>
-            <input type="hidden" th:if="${course} != null" th:value="${course.getCourseId()}" name="courseId">
-            <input type="text" placeholder="Course Name" name="name" th:value="${course!=null}?${course.getName()}:''">
-            <input type="text" placeholder="Course Description" name="description" th:value="${course!=null}?${course.getDescription()}:''">
-            <select class="form-control" name="teacherId" aria-label="Select a teacher">
-                <option th:if="${course} != null"
-                        th:each="teacher : ${listTeachers}"
-                        th:selected="${teacher.getId()==course.getTeacher().getId()}"
-                        th:text="${teacher.getTeacherFullName().getName() + ' ' + teacher.getTeacherFullName().getSurname()}"
-                        th:value="${teacher.getId()}">
-                </option>
-                <option th:if="${course} == null"
-                        th:each="teacher : ${listTeachers}"
-                        th:text="${teacher.getTeacherFullName().getName() + ' ' + teacher.getTeacherFullName().getSurname()}"
-                        th:value="${teacher.getId()}">
-                </option>
-            </select>
-            <input type="submit" value="Submit" id="submit">
+        <input type="text" placeholder="Username" name="username" id="username">
+        <input type="password" placeholder="Password" name="password" id="password">
+        <input type="submit" value="Submit" id="submit">
     </div>
 </form>
 </body>

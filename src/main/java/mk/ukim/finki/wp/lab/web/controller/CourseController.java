@@ -37,11 +37,6 @@ public class CourseController {
         this.gradeService = gradeService;
         this.coursePagingRepository = coursePagingRepository;
     }
-    @GetMapping("/home")
-    public String getHomePage()
-    {
-        return "GrayBox/index";
-    }
     @GetMapping()
     public String getCoursesPage(@RequestParam(required = false) String error, HttpServletRequest req, Model model) {
         if(error != null || req.getSession().getAttribute("error") != null)
@@ -52,7 +47,7 @@ public class CourseController {
             model.addAttribute("error",error);
         }
         ServletContext context = req.getServletContext();
-        int users =(int) context.getAttribute("users");
+        Integer users =(Integer) context.getAttribute("users");
         HttpSession session = req.getSession();
         session.setMaxInactiveInterval(60);
         model.addAttribute("coursesList",courseService.listAllCourses());

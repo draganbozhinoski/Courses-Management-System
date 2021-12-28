@@ -23,12 +23,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="course: ${coursesList}">
+                <tr th:each="course: ${coursesList}" class="course">
                     <td th:text="${course.getCourseId()}"></td>
                     <td> <input  type="radio" name="courseId" th:value="${course.getCourseId()}" th:text="${course.getName()}"> </td>
                     <td th:text="${course.getDescription()}"></td>
                     <td th:text="${course.getTeacher().getTeacherFullName().getName()+ ' ' + course.getTeacher().getTeacherFullName().getSurname()}"></td>
-                    <td><th:block sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/courses/edit/{id} (id = ${course.getCourseId()})}" class="btn btn-info">Edit</a> <a th:href="@{/courses/delete/{id} (id=${course.getCourseId()})}"class="btn btn-danger">Delete</a></th:block></td>
+                    <td><th:block sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/courses/edit/{id} (id = ${course.getCourseId()})}" class="btn btn-info edit-btn">Edit</a> <a th:href="@{/courses/delete/{id} (id=${course.getCourseId()})}" class="btn btn-danger delete-btn">Delete</a></th:block></td>
                 </tr>
             </tbody>
         </table>

@@ -1,5 +1,6 @@
 package mk.ukim.finki.wp.lab.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
+    @Autowired
+    AuthenticationSuccessHandlerImpl authenticationSuccessHandler;
 
     public WebSecurityConfig(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -21,12 +24,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/courses","/grades/allGrades","/teachers/allTeachers","/css/**","/img/**","/js/**","/lib/**")
+                .authorizeRequests().antMatchers("/login","/courses","/grades/allGrades","/teachers/allTeachers","/css/**","/img/**","/js/**","/lib/**")
                 .permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/courses",true)
+                .formLogin()
+                    .successHandler(authenticationSuccessHandler)
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                     .invalidateHttpSession(true)
@@ -34,7 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("JSESSIONID")
                 .and()
                 .exceptionHandling().accessDeniedPage("/courses/access_denied");
-
     }
 
     @Override

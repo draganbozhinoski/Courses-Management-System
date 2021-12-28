@@ -4,7 +4,6 @@ import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CourseService {
     List<Student> listStudentsByCourse(Long courseId);
@@ -15,5 +14,5 @@ public interface CourseService {
     Course findById(Long id);
     Course findByName(String name);
     List<Course> findAllByStudent(Student students);
-    void save(Course z);
+    Course save(Course z);
 }

@@ -2,13 +2,11 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Teacher;
 import mk.ukim.finki.wp.lab.model.TeacherFullName;
-import mk.ukim.finki.wp.lab.repository.InMemory.InMemoryTeacherRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.TeacherRepository;
 import mk.ukim.finki.wp.lab.service.TeacherService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -30,8 +28,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void addTeacher(String name, String surname) {
-        teacherRepository.save(new Teacher(new TeacherFullName(name,surname)));
+    public Teacher addTeacher(String name, String surname) {
+        Teacher add = new Teacher(new TeacherFullName(name,surname));
+        teacherRepository.save(add);
+        return add;
     }
 
     @Override

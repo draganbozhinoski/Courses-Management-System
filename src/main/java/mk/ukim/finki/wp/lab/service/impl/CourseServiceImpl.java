@@ -5,7 +5,6 @@ import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.model.exceptions.CourseAlreadyHereException;
 import mk.ukim.finki.wp.lab.model.exceptions.CourseNotFoundException;
 import mk.ukim.finki.wp.lab.model.exceptions.StudentAlreadyInCourseException;
-import mk.ukim.finki.wp.lab.repository.InMemory.InMemoryCourseRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.CourseRepository;
 import mk.ukim.finki.wp.lab.service.CourseService;
 import mk.ukim.finki.wp.lab.service.StudentService;
@@ -26,56 +25,58 @@ public class CourseServiceImpl implements CourseService {
         this.studentService = studentService;
         this.teacherService = teacherService;
     }
+
     @Override
     public List<Student> listStudentsByCourse(Long courseId) {
         Course z = courseRepository.findById(courseId).orElseThrow(CourseNotFoundException::new);
         return z.getStudents();
     }
+
     @Override
     public Course addStudentInCourse(String username, Long courseId) {
         Student z = studentService.findByUsername(username);
         Course c = courseRepository.findById(courseId).orElseThrow(CourseNotFoundException::new);
-        if(!c.getStudents().contains(z)) {
+        if (!c.getStudents().contains(z)) {
             c.getStudents().add(z);
             courseRepository.save(c);
-        }
-        else
+        } else
             throw new StudentAlreadyInCourseException();
         return c;
     }
+
     @Override
     @Transactional
-    public Course addCourse(String name,String description,Long teacherId) {
-        if(courseRepository.findByName(name).isPresent())
-        {
+    public Course addCourse(String name, String description, Long teacherId) {
+        if (courseRepository.findByName(name) != null) {
             throw new CourseAlreadyHereException();
         }
-        Course vrati = new Course(name,description);
+        Course vrati = new Course(name, description);
         vrati.setTeacher(teacherService.findById(teacherId));
         courseRepository.save(vrati);
         return vrati;
     }
+
     @Override
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
+
     @Override
     public List<Course> listAllCourses() {
         return courseRepository.findAllByOrderByCourseIdAsc();
     }
+
     @Override
     public Course findById(Long id) {
-        if(courseRepository.findById(id).isPresent())
-        {
+        if (courseRepository.findById(id).isPresent()) {
             return courseRepository.findById(id).get();
         }
         throw new CourseNotFoundException();
     }
+
     @Override
     public Course findByName(String name) {
-        if(courseRepository.findByName(name).isPresent())
-            return courseRepository.findByName(name).get();
-        return null;
+        return courseRepository.findByName(name);
     }
 
     @Override
@@ -84,7 +85,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void save(Course z) {
+    public Course save(Course z) {
         courseRepository.save(z);
+        return z;
     }
 }

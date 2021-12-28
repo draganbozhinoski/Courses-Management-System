@@ -8,7 +8,7 @@
         <div class="container-fluid">
 
             <div id="logo" class="pull-left">
-                <h1><a href="#intro" class="scrollto">196060</a></h1>
+                <h1><a href="#intro" class="scrollto">196060 - Dragan Bozhinoski</a></h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
             </div>
@@ -20,7 +20,7 @@
                         <ul>
                             <li><a th:href="@{/courses}">List all Courses</a></li>
                             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                                <li><a th:href="@{/courses/addCourse}">Add new Course</a></li>
+                                <li><a th:href="@{/courses/addCourse}" class="add-course">Add new Course</a></li>
                             </th:block>
                         </ul>
                     </li>
